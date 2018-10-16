@@ -1,0 +1,80 @@
+{# /app/Resources/views/Home/index.html.twig #}
+{% extends '@App/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- DataTables CSS -->
+    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+{% endblock%}
+{% block javascripts %}
+    {{ parent() }}
+    <!-- DataTables JavaScript -->
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+        $(document).ready(function () {
+            $('#clientes').DataTable({
+                "language": {
+                    "url": "{{ asset('js/spanish.json') }}"
+                },
+                responsive: true
+            });
+        });
+    </script>
+{% endblock%}
+{% block body %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Clientes</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Clientes
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="clientes">
+                                <thead>
+                                    <tr>
+                                        <th>Cod. Cliente</th>
+                                        <th>Ruta</th>
+                                        <th>Folio</th>
+                                        <th>Nombre</th>
+                                        <th>Medidor</th>
+                                        <th>Partida</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cliente in clientes %}
+                                        <tr class="odd gradeX">
+                                            <td>{{ cliente.codcliente}}</td>
+                                            <td class="center">{{ cliente.ruta}}</td>
+                                            <td class="center">{{ cliente.folio}}</td>
+                                            <td>{{ cliente.nombre}}</td>
+                                            <td>{{ cliente.nromedidor}}</td>
+                                            <td>{{ cliente.partida}}</td>
+                                        </tr>
+                                    {% endfor%}
+                                </tbody>
+                            </table>
+                            <!-- /.table-responsive -->
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+{% endblock %}
